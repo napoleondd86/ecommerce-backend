@@ -18,10 +18,10 @@ Tag.init(
   },
   {
     sequelize,
-    timestamps: false,
+    timestamps: true,
     freezeTableName: true,
     underscored: true,
-    modelName: 'Tag', //I changed this from "tag"
+    modelName: 'Tag', // IN MYSQL THIS WILL BE "tag"
   }
 );
 

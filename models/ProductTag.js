@@ -29,10 +29,10 @@ ProductTag.init(
   },
   {
     sequelize,
-    timestamps: false,
+    timestamps: true,
     freezeTableName: true,
     underscored: true,
-    modelName: "ProductTag", // I changed this from 'product_tag'  ????????????
+    modelName: "product_tag", // THIS IS WHAT WILL BE DISPLAYED IN MYSQL
   }
 );
 

@@ -43,10 +43,10 @@ Product.init(
   },
   {
     sequelize,
-    timestamps: false,
+    timestamps: true,
     freezeTableName: true,
     underscored: true,
-    modelName: 'Product',  // i changed this from "product"
+    modelName: 'Product',  // IN MYSQL THIS WILL BE "product"
   }
 );
 
