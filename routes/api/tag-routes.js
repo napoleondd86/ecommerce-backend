@@ -2,13 +2,13 @@ const router = require('express').Router();
 const { Tag, Product, ProductTag } = require('../../models');
 
 // The `/api/tags` endpoint
-///////////////// I AM SUPPOSED TO USE ProductTag but idk how/where  ///////////
+
 // find all tags
 // be sure to include its associated Product data
 router.get('/', async (req, res) => {
   try{
     const tagData = await Tag.findAll({
-      include: [{ model: Product }], // THIS INCLUDES ASSOCIATED PRODUCTS
+      include: [{ model: Product, through: ProductTag }], // THIS INCLUDES ASSOCIATED PRODUCTS
     });
     res.status(200).json(tagData);
   } catch (err) {
@@ -21,7 +21,7 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   try {
     const tag = await Tag.findByPk(req.params.id, {
-      include: {model: Product}
+      include: {model: Product, through: ProductTag}
     })
     res.status(200).json(tag);
   } catch (err) {

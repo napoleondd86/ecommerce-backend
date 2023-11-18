@@ -3,14 +3,12 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 
 // The `/api/products` endpoint
 
-//////////////// I THINK MY PIVOT TABLE ISN'T WORKIN ???  /////////
-////////////////////  ???? AM I SUPPOSED TO INCLUDE PRODUCTTAG ????? ///////////
 // get all products
 // be sure to include its associated Category and Tag data
 router.get('/', async (req, res) => {
   try {
     const productData = await Product.findAll({
-      include: [{model: Category}, {model: Tag}]
+      include: [{model: Category}, {model: Tag, through: ProductTag}]
     });
     res.status(200).json(productData);
   } catch (err) {
@@ -24,7 +22,7 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   try {
     const product = await Product.findByPk(req.params.id, { 
-      include: [{model: Category}, {model: Tag}]
+      include: [{model: Category}, {model: Tag, through: ProductTag}]
     });
     res.status(200).json(product);
   } catch (err) {
@@ -32,7 +30,6 @@ router.get('/:id', async (req, res) => {
   } 
 });
 
-///////////////////// IS THIS DONE???  line 43 tagIds??? NOT category_id ///////
 // create new product
 router.post('/', (req, res) => {
   /* req.body should look like this...
@@ -40,6 +37,7 @@ router.post('/', (req, res) => {
       product_name: "Basketball",
       price: 200.00,
       stock: 3,
+      category_id: 
       tagIds: [1, 2, 3, 4]
     }
   */
